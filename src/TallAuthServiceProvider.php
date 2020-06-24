@@ -62,9 +62,10 @@ class TallAuthServiceProvider extends ServiceProvider
                 Route::get('email/verify', [VerificationController::class, 'show'])->name('verification.notice');
                 Route::get('email/verify/{id}/{hash}', [VerificationController::class, 'verify'])->name('verification.verify');
 
-                Route::view('password/confirm', 'tall-auth::passwords.confirm-password')->name('password.confirm')->middleware('auth');
                 Route::view('password/reset', 'tall-auth::passwords.request-password')->name('password.request');
                 Route::get('password/reset/{token}', [ResetPasswordController::class, 'showResetForm'])->name('password.reset');
+
+                Route::view('password/confirm', 'tall-auth::passwords.confirm-password')->middleware('auth')->name('password.confirm');
             });
         });
 

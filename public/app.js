@@ -138,8 +138,8 @@ eval("// removed by extract-text-webpack-plugin//# sourceURL=[module]\n//# sourc
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/oliver/Workspace/laravel-veloinvoice/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /Users/oliver/Workspace/laravel-veloinvoice/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /Users/oliver/Workspace/laravel-tall-auth/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /Users/oliver/Workspace/laravel-tall-auth/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

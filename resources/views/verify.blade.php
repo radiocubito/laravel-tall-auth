@@ -1,10 +1,11 @@
 @extends('tall-auth::layouts.auth')
 @section('title', 'Verify your email address')
+@section('heading', 'Verify your email address')
 
 @section('content')
-    <section class="mt-8">
+    <x-card>
         @if (session('resent'))
-            <div class="rounded-md bg-green-50 p-4 border border-green-800 mt-4">
+            <div class="rounded-md bg-green-50 p-4 border border-green-800 mb-6">
                 <div class="flex">
                     <div class="flex-shrink-0">
                         <svg class="h-5 w-5 text-green-400" fill="currentColor" viewBox="0 0 20 20">
@@ -20,8 +21,14 @@
             </div>
         @endif
 
-        <p class="mt-6">
+        <p class="text-sm">
             {{ __('Before proceeding, please check your email for a verification link.') }}
         </p>
-    </section>
+    </x-card>
+@endsection
+
+@section('footer')
+    <div class="space-y-2">
+        <small class="block text-xs text-gray-400">Did not receive the email? @livewire('tall-auth.resend-verification')</small>
+    </div>
 @endsection

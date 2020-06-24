@@ -23,4 +23,4 @@ if (mix.inProduction()) {
     mix.version();
 }
 
-mix.copy('public', '../tall-auth/public/vendor/tall-auth');
+mix.copy('public', '../laravel-tall-auth-app/public/vendor/tall-auth');

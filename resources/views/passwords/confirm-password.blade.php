@@ -1,5 +1,6 @@
 @extends('tall-auth::layouts.auth')
 @section('title', 'Confirm password')
+@section('heading', 'Confirm password')
 
 @section('content')
     <div>
