@@ -3,7 +3,6 @@
 namespace Radiocubito\TallAuth\Tests\Feature\Http\Livewire\Auth;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
 use Livewire\Livewire;
@@ -26,6 +25,7 @@ class ConfirmPasswordTest extends TestCase
     /** @test */
     public function a_user_must_confirm_their_password_before_visiting_a_protected_page()
     {
+        $this->withoutExceptionHandling();
         $user = factory(User::class)->create();
         $this->be($user);
 
@@ -34,13 +34,13 @@ class ConfirmPasswordTest extends TestCase
 
         $this->followingRedirects()
             ->get('/must-be-confirmed')
-            ->assertSeeLivewire('auth.passwords.confirm-password');
+            ->assertSeeLivewire('tall-auth.passwords.confirm-password');
     }
 
     /** @test */
     public function a_user_must_enter_a_password_to_confirm_it()
     {
-        Livewire::test('auth.passwords.confirm-password')
+        Livewire::test('tall-auth.passwords.confirm-password')
             ->call('confirm')
             ->assertHasErrors(['password' => 'required']);
     }
@@ -52,7 +52,7 @@ class ConfirmPasswordTest extends TestCase
             'password' => Hash::make('password'),
         ]);
 
-        Livewire::test('auth.passwords.confirm-password')
+        Livewire::test('tall-auth.passwords.confirm-password')
             ->set('password', 'not-password')
             ->call('confirm')
             ->assertHasErrors(['password' => 'password']);
@@ -69,7 +69,7 @@ class ConfirmPasswordTest extends TestCase
 
         $this->withSession(['url.intended' => '/must-be-confirmed']);
 
-        Livewire::test('auth.passwords.confirm-password')
+        Livewire::test('tall-auth.passwords.confirm-password')
             ->set('password', 'password')
             ->call('confirm')
             ->assertRedirect('/must-be-confirmed');

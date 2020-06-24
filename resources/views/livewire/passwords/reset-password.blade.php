@@ -1,33 +1,23 @@
-@section('header')
-    <h2 class="mt-6 text-center text-3xl leading-9 font-extrabold text-gray-900">
-        {{ __('Reset your password') }}
-    </h2>
-@endsection
-
 <section>
-    @include('auth._errors', compact('errors'))
-
     <form wire:submit.prevent="submit" class="mt-8">
-        <x-form.text-field name="email">
-            <x-slot name="label">
-                {{ __('Email address') }}
-            </x-slot>
-        </x-form.text-field>
+        <x-input.group label="Email address" for="email" :error="$errors->first('email')">
+            <x-input.text wire:model.lazy="email" id="email" required />
+        </x-input.group>
 
-        <x-form.text-field name="password" type="password" class="mt-6">
-            <x-slot name="label">
-                {{ __('Password') }}
-            </x-slot>
-        </x-form.text-field>
+        <x-input.group label="Password" for="password" :error="$errors->first('password')">
+            <x-input.text wire:model.lazy="password" id="password" type="password" required />
+        </x-input.group>
 
-        <x-form.text-field name="password_confirmation" type="password" class="mt-6">
-            <x-slot name="label">
-                {{ __('Confirm password') }}
-            </x-slot>
-        </x-form.text-field>
+        <x-input.group label="Confirm password" for="password_confirmation" :error="$errors->first('password_confirmation')">
+            <x-input.text wire:model.lazy="password_confirmation" id="password_confirmation" type="password" required />
+        </x-input.group>
 
-        <x-form.submit-auth-button class="mt-6">
-            {{ __('Confirm password change') }}
-        </x-form.submit-auth-button>
+        <div class="mt-6">
+            <span class="block w-full rounded-md">
+                <button type="submit" class="flex justify-center w-full px-4 py-2 text-sm font-medium text-white bg-blue-600 border border-transparent rounded-md hover:bg-blue-500 focus:outline-none focus:border-blue-700 focus:shadow-outline-blue active:bg-blue-700 transition duration-150 ease-in-out">
+                    {{ __('Confirm password change') }}
+                </button>
+            </span>
+        </div>
     </form>
 </section>

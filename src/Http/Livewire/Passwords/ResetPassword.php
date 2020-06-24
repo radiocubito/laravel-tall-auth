@@ -2,9 +2,7 @@
 
 namespace Radiocubito\TallAuth\Http\Livewire\Passwords;
 
-use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\PasswordReset;
-use Illuminate\Foundation\Auth\ResetsPasswords;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -23,15 +21,15 @@ class ResetPassword extends Component
 
     public $password_confirmation;
 
-    public function mount(Request $request, $token = null)
+    public function mount($email, $token = null)
     {
-        $this->email = $request->email;
+        $this->email = $email;
         $this->token = $token;
     }
 
     public function render()
     {
-        return view('livewire.auth.passwords.reset-password')->with(
+        return view('tall-auth::livewire.passwords.reset-password')->with(
             ['token' => $this->token, 'email' => $this->email]
         );
     }
@@ -44,7 +42,8 @@ class ResetPassword extends Component
         // will update the password on an actual user model and persist it to the
         // database. Otherwise we will parse the error and return the response.
         $response = $this->broker()->reset(
-            $this->credentials(), function ($user, $password) {
+            $this->credentials(),
+            function ($user, $password) {
                 $this->resetPassword($user, $password);
             }
         );
@@ -83,7 +82,7 @@ class ResetPassword extends Component
 
     protected function redirectTo()
     {
-        return RouteServiceProvider::HOME;
+        return route('home');
     }
 
     protected function rules()

@@ -4,7 +4,6 @@ namespace Radiocubito\TallAuth\Tests\Feature\Http\Livewire\Auth;
 
 use Carbon\Carbon;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -20,6 +19,7 @@ class ResetPasswordTest extends TestCase
     /** @test */
     public function can_view_password_reset_page()
     {
+        $this->withoutExceptionHandling();
         $user = factory(User::class)->create();
 
         $token = Str::random(16);
@@ -35,7 +35,7 @@ class ResetPasswordTest extends TestCase
             'token' => $token,
         ]))
             ->assertSuccessful()
-            ->assertSeeLivewire('auth.passwords.reset-password');
+            ->assertSeeLivewire('tall-auth.passwords.reset-password');
     }
 
     /** @test */
@@ -51,7 +51,8 @@ class ResetPasswordTest extends TestCase
             'created_at' => Carbon::now(),
         ]);
 
-        Livewire::test('auth.passwords.reset-password', [
+        Livewire::test('tall-auth.passwords.reset-password', [
+            'email' => $user->email,
             'token' => $token,
         ])
             ->set('email', $user->email)
@@ -68,7 +69,8 @@ class ResetPasswordTest extends TestCase
     /** @test */
     public function token_is_required()
     {
-        Livewire::test('auth.passwords.reset-password', [
+        Livewire::test('tall-auth.passwords.reset-password', [
+            'email' => 'john@example.com',
             'token' => null,
         ])
             ->call('submit')
@@ -78,7 +80,8 @@ class ResetPasswordTest extends TestCase
     /** @test */
     public function email_is_required()
     {
-        Livewire::test('auth.passwords.reset-password', [
+        Livewire::test('tall-auth.passwords.reset-password', [
+            'email' => 'john@example.com',
             'token' => Str::random(16),
         ])
             ->set('email', null)
@@ -89,7 +92,8 @@ class ResetPasswordTest extends TestCase
     /** @test */
     public function email_is_valid_email()
     {
-        Livewire::test('auth.passwords.reset-password', [
+        Livewire::test('tall-auth.passwords.reset-password', [
+            'email' => 'john@example.com',
             'token' => Str::random(16),
         ])
             ->set('email', 'email')
@@ -98,9 +102,10 @@ class ResetPasswordTest extends TestCase
     }
 
     /** @test */
-    function password_is_required()
+    public function password_is_required()
     {
-        Livewire::test('auth.passwords.reset-password', [
+        Livewire::test('tall-auth.passwords.reset-password', [
+            'email' => 'john@example.com',
             'token' => Str::random(16),
         ])
             ->set('password', '')
@@ -109,9 +114,10 @@ class ResetPasswordTest extends TestCase
     }
 
     /** @test */
-    function password_is_minimum_of_eight_characters()
+    public function password_is_minimum_of_eight_characters()
     {
-        Livewire::test('auth.passwords.reset-password', [
+        Livewire::test('tall-auth.passwords.reset-password', [
+            'email' => 'john@example.com',
             'token' => Str::random(16),
         ])
             ->set('password', 'secret')
@@ -120,9 +126,10 @@ class ResetPasswordTest extends TestCase
     }
 
     /** @test */
-    function password_matches_password_confirmation()
+    public function password_matches_password_confirmation()
     {
-        Livewire::test('auth.passwords.reset-password', [
+        Livewire::test('tall-auth.passwords.reset-password', [
+            'email' => 'john@example.com',
             'token' => Str::random(16),
         ])
             ->set('password', 'new-password')

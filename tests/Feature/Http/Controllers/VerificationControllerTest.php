@@ -2,9 +2,8 @@
 
 namespace Radiocubito\TallAuth\Tests\Feature\Http\Controllers;
 
-use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
+use Radiocubito\TallAuth\Tests\Fixtures\User;
 use Radiocubito\TallAuth\Tests\TestCase;
 
 class VerificationControllerTest extends TestCase
@@ -14,6 +13,8 @@ class VerificationControllerTest extends TestCase
     /** @test */
     public function can_view_verification_page()
     {
+        $this->withoutExceptionHandling();
+
         $user = factory(User::class)->create([
             'email_verified_at' => null,
         ]);
@@ -39,7 +40,7 @@ class VerificationControllerTest extends TestCase
         ]);
 
         $this->get($url)
-            ->assertRedirect(route('dashboard'));
+            ->assertRedirect('/home');
 
         $this->assertTrue($user->hasVerifiedEmail());
     }

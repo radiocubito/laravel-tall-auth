@@ -1,25 +1,15 @@
-@section('header')
-    <h2 class="mt-6 text-center text-3xl leading-9 font-extrabold text-gray-900">
-        {{ __('Confirm password') }}
-    </h2>
-@endsection
-
 <section>
     <form wire:submit.prevent="confirm" class="mt-8">
-        @include('auth._errors', compact('errors'))
+        <x-input.group label="Password" for="password" :error="$errors->first('password')">
+            <x-input.text wire:model.lazy="password" id="password" type="password" required />
+        </x-input.group>
 
-        <x-form.text-field name="password" type="password" class="mt-6">
-            <x-slot name="label">
-                {{ __('Password') }}
-            </x-slot>
-        </x-form.text-field>
-
-        <x-form.submit-auth-button class="mt-6">
-            {{ __('Confirm password') }}
-        </x-form.submit-auth-button>
+        <div class="mt-6">
+            <span class="block w-full rounded-md">
+                <button type="submit" class="flex justify-center w-full px-4 py-2 text-sm font-medium text-white bg-blue-600 border border-transparent rounded-md hover:bg-blue-500 focus:outline-none focus:border-blue-700 focus:shadow-outline-blue active:bg-blue-700 transition duration-150 ease-in-out">
+                    Confirm password
+                </button>
+            </span>
+        </div>
     </form>
 </section>
-
-@section('footer')
-    <p>{{ __('Forgot your password?') }} <a class="underline hover:text-gray-600" href="{{ route('password.request') }}">{{ __('Reset it') }}</a>.</p>
-@endsection

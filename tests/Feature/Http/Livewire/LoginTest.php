@@ -3,7 +3,6 @@
 namespace Radiocubito\TallAuth\Tests\Feature\Http\Livewire;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\MessageBag;
@@ -21,7 +20,7 @@ class LoginTest extends TestCase
     {
         $this->withoutExceptionHandling();
 
-        $this->get(route('tall-auth.login'))
+        $this->get(route('login'))
             ->assertSuccessful()
             ->assertSeeLivewire('tall-auth.login');
     }
@@ -33,7 +32,7 @@ class LoginTest extends TestCase
 
         $this->be($user);
 
-        $this->get(route('tall-auth.login'))
+        $this->get(route('login'))
             ->assertRedirect('/home');
     }
 

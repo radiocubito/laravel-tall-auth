@@ -2,11 +2,11 @@
 
 namespace Radiocubito\TallAuth;
 
-use Illuminate\Support\Str;
+use Illuminate\Cache\RateLimiter;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Illuminate\Cache\RateLimiter;
 use Illuminate\Support\Facades\Lang;
+use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
 
 /**
@@ -27,7 +27,6 @@ trait ThrottlesRequests
     protected function checkThrottling($request, bool $hit = false, int $maxAttempts = null)
     {
         if ($this->hasTooManyAttempts($request, $maxAttempts)) {
-
             if (method_exists($this, 'fireThrottledEvent')) {
                 $this->fireThrottledEvent($request);
             }
@@ -50,7 +49,8 @@ trait ThrottlesRequests
     protected function hasTooManyAttempts(Request $request, int $maxAttempts = null)
     {
         return $this->limiter()->tooManyAttempts(
-            $this->throttleKey($request), $maxAttempts ?? $this->maxAttempts()
+            $this->throttleKey($request),
+            $maxAttempts ?? $this->maxAttempts()
         );
     }
 
@@ -63,7 +63,8 @@ trait ThrottlesRequests
     protected function incrementAttempts(Request $request)
     {
         $this->limiter()->hit(
-            $this->throttleKey($request), $this->decayMinutes() * 60
+            $this->throttleKey($request),
+            $this->decayMinutes() * 60
         );
     }
 
@@ -78,7 +79,7 @@ trait ThrottlesRequests
     protected function sendThrottledResponse(Request $request)
     {
         throw ValidationException::withMessages([
-            Lang::get('auth.throttle', ['seconds' => $this->availableIn($request)])
+            Lang::get('auth.throttle', ['seconds' => $this->availableIn($request)]),
         ])->status(Response::HTTP_TOO_MANY_REQUESTS);
     }
 
@@ -86,7 +87,7 @@ trait ThrottlesRequests
      * Returns how many seconds until the request can be retried again
      *
      * @param  \Illuminate\Http\Request $request
-     * @return integer
+     * @return int
      */
     protected function availableIn(Request $request)
     {

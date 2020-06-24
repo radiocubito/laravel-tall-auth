@@ -2,12 +2,9 @@
 
 namespace Radiocubito\TallAuth\Http\Livewire;
 
-use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
-use Illuminate\Validation\ValidationException;
 use Livewire\Component;
 
 class Login extends Component
@@ -46,7 +43,8 @@ class Login extends Component
     protected function attemptLogin()
     {
         return $this->guard()->attempt(
-            $this->credentials(), $this->remember
+            $this->credentials(),
+            $this->remember
         );
     }
 

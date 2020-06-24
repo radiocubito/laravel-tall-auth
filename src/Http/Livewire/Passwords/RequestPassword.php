@@ -5,7 +5,6 @@ namespace Radiocubito\TallAuth\Http\Livewire\Passwords;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\URL;
 use Illuminate\Validation\ValidationException;
 use Livewire\Component;
 
@@ -24,7 +23,7 @@ class RequestPassword extends Component
 
     public function render()
     {
-        return view('livewire.auth.passwords.request-password');
+        return view('tall-auth::livewire.passwords.request-password');
     }
 
     protected function redirectTo()

@@ -2,7 +2,6 @@
 
 namespace Radiocubito\TallAuth\Http\Livewire\Passwords;
 
-use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\ConfirmsPasswords;
 use Illuminate\Http\Request;
 use Livewire\Component;
@@ -15,7 +14,7 @@ class ConfirmPassword extends Component
 
     public function render()
     {
-        return view('livewire.auth.passwords.confirm-password');
+        return view('tall-auth::livewire.passwords.confirm-password');
     }
 
     public function confirm(Request $request)
@@ -29,7 +28,7 @@ class ConfirmPassword extends Component
 
     protected function redirectTo()
     {
-        return RouteServiceProvider::HOME;
+        return route('home');
     }
 
     protected function resetPasswordConfirmationTimeout()

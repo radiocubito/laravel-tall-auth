@@ -4,7 +4,6 @@ namespace Radiocubito\TallAuth\Tests\Feature\Http\Livewire;
 
 use Illuminate\Auth\Notifications\VerifyEmail;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Facades\Notification;
 use Livewire\Livewire;
 use Radiocubito\TallAuth\Tests\Fixtures\User;

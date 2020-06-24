@@ -1,31 +1,15 @@
-@section('header')
-    <h2 class="mt-6 text-center text-3xl leading-9 font-extrabold text-gray-900">
-        {{ __('Update your password') }}
-    </h2>
-
-    <p class="mt-2 text-sm leading-5 text-gray-600 max-w">
-        {{ __("If you've forgotten your password, you can send yourself an email to reset it. Enter the email address of your account to get started.") }}
-    </p>
-@endsection
-
 <section>
-    @include('auth._status')
-
     <form wire:submit.prevent="sendResetLinkEmail" class="mt-8">
-        @include('auth._errors', compact('errors'))
+        <x-input.group label="Email address" for="email" :error="$errors->first('email')">
+            <x-input.text wire:model.lazy="email" id="email" required />
+        </x-input.group>
 
-        <x-form.text-field name="email">
-            <x-slot name="label">
-                {{ __('Email address') }}
-            </x-slot>
-        </x-form.text-field>
-
-        <x-form.submit-auth-button class="mt-6">
-            {{ __('Send password reset link') }}
-        </x-form.submit-auth-button>
+        <div class="mt-6">
+            <span class="block w-full rounded-md">
+                <button type="submit" class="flex justify-center w-full px-4 py-2 text-sm font-medium text-white bg-blue-600 border border-transparent rounded-md hover:bg-blue-500 focus:outline-none focus:border-blue-700 focus:shadow-outline-blue active:bg-blue-700 transition duration-150 ease-in-out">
+                    {{ __('Send password reset link') }}
+                </button>
+            </span>
+        </div>
     </form>
 </section>
-
-@section('footer')
-    <p class="mb-1">{{ __("Don't have an account yet?") }} <a class="underline hover:text-gray-600" href="{{ route('register') }}">{{ __('Sign up') }}</a>.</p>
-@endsection
