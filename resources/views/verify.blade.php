@@ -5,7 +5,7 @@
 @section('content')
     <x-card>
         @if (session('resent'))
-            <div class="rounded-md bg-green-50 p-4 border border-green-800 mb-6">
+            <div class="rounded-md bg-green-50 p-4 mb-6">
                 <div class="flex">
                     <div class="flex-shrink-0">
                         <svg class="h-5 w-5 text-green-400" fill="currentColor" viewBox="0 0 20 20">
