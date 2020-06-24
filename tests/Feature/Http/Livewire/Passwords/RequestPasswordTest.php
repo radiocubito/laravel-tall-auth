@@ -2,10 +2,10 @@
 
 namespace Radiocubito\TallAuth\Tests\Feature\Http\Livewire\Auth;
 
-use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Livewire\Livewire;
+use Radiocubito\TallAuth\Tests\Fixtures\User;
 use Radiocubito\TallAuth\Tests\TestCase;
 
 class RequestPasswordTest extends TestCase

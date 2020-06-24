@@ -2,19 +2,19 @@
 
 namespace Radiocubito\TallAuth\Tests\Feature\Http\Livewire\Auth;
 
-use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
 use Livewire\Livewire;
+use Radiocubito\TallAuth\Tests\Fixtures\User;
 use Radiocubito\TallAuth\Tests\TestCase;
 
 class ConfirmPasswordTest extends TestCase
 {
     use RefreshDatabase;
 
-    protected function setUp(): void
+    public function setUp(): void
     {
         parent::setUp();
 
