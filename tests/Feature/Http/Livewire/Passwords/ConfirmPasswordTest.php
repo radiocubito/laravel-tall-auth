@@ -3,7 +3,6 @@
 namespace Radiocubito\TallAuth\Tests\Feature\Http\Livewire\Auth;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
 use Livewire\Livewire;

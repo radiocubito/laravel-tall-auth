@@ -3,7 +3,6 @@
 namespace Radiocubito\TallAuth\Tests\Feature\Http\Livewire;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Livewire\Livewire;
 use Radiocubito\TallAuth\Http\Livewire\Logout;
 use Radiocubito\TallAuth\Tests\Fixtures\User;

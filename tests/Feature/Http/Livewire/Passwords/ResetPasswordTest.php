@@ -4,7 +4,6 @@ namespace Radiocubito\TallAuth\Tests\Feature\Http\Livewire\Auth;
 
 use Carbon\Carbon;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -98,7 +97,7 @@ class ResetPasswordTest extends TestCase
     }
 
     /** @test */
-    function password_is_required()
+    public function password_is_required()
     {
         Livewire::test('auth.passwords.reset-password', [
             'token' => Str::random(16),
@@ -109,7 +108,7 @@ class ResetPasswordTest extends TestCase
     }
 
     /** @test */
-    function password_is_minimum_of_eight_characters()
+    public function password_is_minimum_of_eight_characters()
     {
         Livewire::test('auth.passwords.reset-password', [
             'token' => Str::random(16),
@@ -120,7 +119,7 @@ class ResetPasswordTest extends TestCase
     }
 
     /** @test */
-    function password_matches_password_confirmation()
+    public function password_matches_password_confirmation()
     {
         Livewire::test('auth.passwords.reset-password', [
             'token' => Str::random(16),

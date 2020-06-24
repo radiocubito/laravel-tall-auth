@@ -4,7 +4,6 @@ namespace Radiocubito\TallAuth\Http\Livewire\Passwords;
 
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\PasswordReset;
-use Illuminate\Foundation\Auth\ResetsPasswords;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -44,7 +43,8 @@ class ResetPassword extends Component
         // will update the password on an actual user model and persist it to the
         // database. Otherwise we will parse the error and return the response.
         $response = $this->broker()->reset(
-            $this->credentials(), function ($user, $password) {
+            $this->credentials(),
+            function ($user, $password) {
                 $this->resetPassword($user, $password);
             }
         );

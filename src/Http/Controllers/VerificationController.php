@@ -5,7 +5,6 @@ namespace Radiocubito\TallAuth\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\VerifiesEmails;
-use Illuminate\Support\Facades\Config;
 
 class VerificationController extends Controller
 {

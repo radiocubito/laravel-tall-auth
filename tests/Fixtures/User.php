@@ -2,7 +2,6 @@
 
 namespace Radiocubito\TallAuth\Tests\Fixtures;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 

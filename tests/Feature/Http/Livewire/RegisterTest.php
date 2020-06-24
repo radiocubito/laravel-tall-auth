@@ -2,11 +2,7 @@
 
 namespace Radiocubito\TallAuth\Tests\Feature\Http\Livewire;
 
-use Illuminate\Auth\Events\Registered;
-use Illuminate\Auth\Notifications\VerifyEmail;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Notification;
 use Livewire\Livewire;
@@ -19,7 +15,7 @@ class RegisterTest extends TestCase
     use RefreshDatabase;
 
     /** @test */
-    function registration_page_contains_livewire_component()
+    public function registration_page_contains_livewire_component()
     {
         $this->get(route('tall-auth.register'))
             ->assertSuccessful()
@@ -58,7 +54,7 @@ class RegisterTest extends TestCase
     }
 
     /** @test */
-    function name_is_required()
+    public function name_is_required()
     {
         Livewire::test(Register::class)
             ->set('name', '')
@@ -67,7 +63,7 @@ class RegisterTest extends TestCase
     }
 
     /** @test */
-    function email_is_required()
+    public function email_is_required()
     {
         Livewire::test(Register::class)
             ->set('email', '')
@@ -76,7 +72,7 @@ class RegisterTest extends TestCase
     }
 
     /** @test */
-    function email_is_valid_email()
+    public function email_is_valid_email()
     {
         Livewire::test(Register::class)
             ->set('email', 'invalid-email')
@@ -85,7 +81,7 @@ class RegisterTest extends TestCase
     }
 
     /** @test */
-    function email_hasnt_been_taken_already()
+    public function email_hasnt_been_taken_already()
     {
         factory(User::class)->create(['email' => 'tallstack@example.com']);
 
@@ -96,7 +92,7 @@ class RegisterTest extends TestCase
     }
 
     /** @test */
-    function see_email_hasnt_already_been_taken_validation_message_as_user_types()
+    public function see_email_hasnt_already_been_taken_validation_message_as_user_types()
     {
         factory(User::class)->create(['email' => 'tallstack@example.com']);
 
@@ -109,7 +105,7 @@ class RegisterTest extends TestCase
     }
 
     /** @test */
-    function password_is_required()
+    public function password_is_required()
     {
         Livewire::test(Register::class)
             ->set('password', '')
@@ -119,7 +115,7 @@ class RegisterTest extends TestCase
     }
 
     /** @test */
-    function password_is_minimum_of_eight_characters()
+    public function password_is_minimum_of_eight_characters()
     {
         Livewire::test(Register::class)
             ->set('password', 'secret')
@@ -129,7 +125,7 @@ class RegisterTest extends TestCase
     }
 
     /** @test */
-    function password_matches_password_confirmation()
+    public function password_matches_password_confirmation()
     {
         Livewire::test(Register::class)
             ->set('email', 'john@example.com')

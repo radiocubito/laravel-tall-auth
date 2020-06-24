@@ -4,7 +4,6 @@ namespace Radiocubito\TallAuth\Tests\Feature\Http\Controllers;
 
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Radiocubito\TallAuth\Tests\TestCase;
 
 class VerificationControllerTest extends TestCase
