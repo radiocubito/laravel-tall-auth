@@ -9,7 +9,7 @@
     "license": "MIT",
     "authors": [
         {
-            "name": "Oliver Jiménez-Servín",
+            "name": "Oliver Jiménez Servín",
             "email": "oliver@radiocubito.com",
             "homepage": "https://radiocubito.com",
             "role": "Developer"
@@ -18,7 +18,8 @@
     "require": {
         "php": "^7.4",
         "laravel/ui": "^2.0",
-        "livewire/livewire": "^1.2"
+        "livewire/livewire": "^1.2",
+        "radiocubito/laravel-blade-input": "^1.0"
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^2.16",

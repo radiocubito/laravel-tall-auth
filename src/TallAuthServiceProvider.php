@@ -59,8 +59,8 @@ class TallAuthServiceProvider extends ServiceProvider
                 Route::view('register', 'tall-auth::register')->middleware('guest')->name('register');
                 Route::view('login', 'tall-auth::login')->middleware('guest')->name('login');
 
-                Route::get('email/verify', [VerificationController::class, 'show'])->name('verification.notice');
-                Route::get('email/verify/{id}/{hash}', [VerificationController::class, 'verify'])->name('verification.verify');
+                Route::get('email/verify', [VerificationController::class, 'show'])->middleware(['throttle:6,1', 'auth'])->name('verification.notice');
+                Route::get('email/verify/{id}/{hash}', [VerificationController::class, 'verify'])->middleware('signed')->name('verification.verify');
 
                 Route::view('password/reset', 'tall-auth::passwords.request-password')->name('password.request');
                 Route::get('password/reset/{token}', [ResetPasswordController::class, 'showResetForm'])->name('password.reset');
@@ -75,10 +75,6 @@ class TallAuthServiceProvider extends ServiceProvider
     protected function registerViews(): self
     {
         $this->loadViewsFrom(__DIR__.'/../resources/views', 'tall-auth');
-
-        Blade::component('tall-auth::components.input.group', 'input.group');
-        Blade::component('tall-auth::components.input.text', 'input.text');
-        Blade::component('tall-auth::components.card', 'card');
 
         return $this;
     }

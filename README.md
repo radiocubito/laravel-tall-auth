@@ -61,7 +61,7 @@ If you discover any security related issues, please email oliver@radiocubito.com
 
 ## Credits
 
-- [Oliver Jiménez-Servín](https://github.com/oliverds)
+- [Oliver Jiménez Servín](https://github.com/oliverds)
 - [All Contributors](../../contributors)
 
 ## License

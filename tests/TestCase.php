@@ -5,6 +5,7 @@ namespace Radiocubito\TallAuth\Tests;
 use Illuminate\Support\Facades\Route;
 use Livewire\LivewireServiceProvider;
 use Orchestra\Testbench\TestCase as Orchestra;
+use Radiocubito\BladeInput\BladeInputServiceProvider;
 use Radiocubito\TallAuth\TallAuthServiceProvider;
 use Radiocubito\TallAuth\Tests\Fixtures\User;
 
@@ -30,6 +31,7 @@ class TestCase extends Orchestra
         return [
             TallAuthServiceProvider::class,
             LivewireServiceProvider::class,
+            BladeInputServiceProvider::class,
         ];
     }
 
