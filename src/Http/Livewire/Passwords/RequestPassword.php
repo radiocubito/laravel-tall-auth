@@ -2,7 +2,6 @@
 
 namespace Radiocubito\TallAuth\Http\Livewire\Passwords;
 
-use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
