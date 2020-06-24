@@ -2,8 +2,6 @@
 
 namespace Radiocubito\TallAuth\Http\Livewire;
 
-use App\Providers\RouteServiceProvider;
-use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -32,7 +30,7 @@ class Register extends Component
 
     public function render()
     {
-        return view('livewire.auth.register');
+        return view('tall-auth::livewire.register');
     }
 
     protected function validator()
@@ -53,7 +51,9 @@ class Register extends Component
 
     protected function create()
     {
-        return User::create([
+        $userModel = config('auth.providers.users.model');
+
+        return $userModel::create([
             'name' => $this->name,
             'email' => $this->email,
             'password' => Hash::make($this->password),
@@ -62,6 +62,6 @@ class Register extends Component
 
     protected function redirectTo()
     {
-        return RouteServiceProvider::HOME;
+        return route('home');
     }
 }

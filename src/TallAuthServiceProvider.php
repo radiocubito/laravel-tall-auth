@@ -16,7 +16,9 @@ class TallAuthServiceProvider extends ServiceProvider
             ->registerRoutes()
             ->registerViews();
 
+        Livewire::component('tall-auth.register', \Radiocubito\TallAuth\Http\Livewire\Register::class);
         Livewire::component('tall-auth.login', \Radiocubito\TallAuth\Http\Livewire\Login::class);
+        Livewire::component('tall-auth.logout', \Radiocubito\TallAuth\Http\Livewire\Logout::class);
 
         Blade::directive('route', function ($expression) {
             return "<?php echo route({$expression}) ?>";
@@ -48,6 +50,7 @@ class TallAuthServiceProvider extends ServiceProvider
     {
         Route::macro('tallAuth', function (string $prefix) {
             Route::prefix($prefix)->group(function () {
+                Route::view('register', 'tall-auth::register')->middleware('guest')->name('tall-auth.register');
                 Route::view('login', 'tall-auth::login')->middleware('guest')->name('tall-auth.login');
 
                 Route::view('password/reset', 'tall-auth::passwords.request-password')->name('password.request');

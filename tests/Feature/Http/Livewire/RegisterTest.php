@@ -2,9 +2,6 @@
 
 namespace Radiocubito\TallAuth\Tests\Feature\Http\Livewire;
 
-use App\Http\Livewire\Auth\Register;
-use App\Team;
-use App\User;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Notifications\VerifyEmail;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -13,6 +10,8 @@ use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Notification;
 use Livewire\Livewire;
+use Radiocubito\TallAuth\Http\Livewire\Register;
+use Radiocubito\TallAuth\Tests\Fixtures\User;
 use Radiocubito\TallAuth\Tests\TestCase;
 
 class RegisterTest extends TestCase
@@ -22,9 +21,9 @@ class RegisterTest extends TestCase
     /** @test */
     function registration_page_contains_livewire_component()
     {
-        $this->get(route('register'))
+        $this->get(route('tall-auth.register'))
             ->assertSuccessful()
-            ->assertSeeLivewire('auth.register');
+            ->assertSeeLivewire('tall-auth.register');
     }
 
     /** @test */
@@ -34,8 +33,8 @@ class RegisterTest extends TestCase
 
         $this->be($user);
 
-        $this->get(route('register'))
-            ->assertRedirect(route('dashboard'));
+        $this->get(route('tall-auth.register'))
+            ->assertRedirect('/home');
     }
 
     /** @test */
@@ -49,27 +48,19 @@ class RegisterTest extends TestCase
             ->set('password', 'password')
             ->set('password_confirmation', 'password')
             ->call('register')
-            ->assertRedirect(route('dashboard'));
+            ->assertRedirect(route('home'));
 
         $this->assertCount(1, $users = User::all());
         $this->assertAuthenticatedAs($user = $users->first());
         $this->assertEquals('John Doe', $user->name);
         $this->assertEquals('john@example.com', $user->email);
         $this->assertTrue(Hash::check('password', $user->password));
-
-        Notification::assertSentTo($user, VerifyEmail::class);
-
-        $this->assertCount(1, $teams = Team::all());
-        $this->assertTrue($user->onTeam($team = $teams->first()));
-        $this->assertTrue($user->ownsTeam($team));
-        $this->assertEquals('Personal', $team->name);
-        $this->assertTrue($team->onTrial());
     }
 
     /** @test */
     function name_is_required()
     {
-        Livewire::test('auth.register')
+        Livewire::test(Register::class)
             ->set('name', '')
             ->call('register')
             ->assertHasErrors(['email' => 'required']);
@@ -78,7 +69,7 @@ class RegisterTest extends TestCase
     /** @test */
     function email_is_required()
     {
-        Livewire::test('auth.register')
+        Livewire::test(Register::class)
             ->set('email', '')
             ->call('register')
             ->assertHasErrors(['email' => 'required']);
@@ -87,7 +78,7 @@ class RegisterTest extends TestCase
     /** @test */
     function email_is_valid_email()
     {
-        Livewire::test('auth.register')
+        Livewire::test(Register::class)
             ->set('email', 'invalid-email')
             ->call('register')
             ->assertHasErrors(['email' => 'email']);
@@ -98,7 +89,7 @@ class RegisterTest extends TestCase
     {
         factory(User::class)->create(['email' => 'tallstack@example.com']);
 
-        Livewire::test('auth.register')
+        Livewire::test(Register::class)
             ->set('email', 'tallstack@example.com')
             ->call('register')
             ->assertHasErrors(['email' => 'unique']);
@@ -109,7 +100,7 @@ class RegisterTest extends TestCase
     {
         factory(User::class)->create(['email' => 'tallstack@example.com']);
 
-        Livewire::test('auth.register')
+        Livewire::test(Register::class)
             ->set('email', 'smallstack@gmail.com')
             ->assertHasNoErrors()
             ->set('email', 'tallstack@example.com')
@@ -120,7 +111,7 @@ class RegisterTest extends TestCase
     /** @test */
     function password_is_required()
     {
-        Livewire::test('auth.register')
+        Livewire::test(Register::class)
             ->set('password', '')
             ->set('password_confirmation', 'password')
             ->call('register')
@@ -130,7 +121,7 @@ class RegisterTest extends TestCase
     /** @test */
     function password_is_minimum_of_eight_characters()
     {
-        Livewire::test('auth.register')
+        Livewire::test(Register::class)
             ->set('password', 'secret')
             ->set('password_confirmation', 'secret')
             ->call('register')
@@ -140,7 +131,7 @@ class RegisterTest extends TestCase
     /** @test */
     function password_matches_password_confirmation()
     {
-        Livewire::test('auth.register')
+        Livewire::test(Register::class)
             ->set('email', 'john@example.com')
             ->set('password', 'password')
             ->set('password_confirmation', 'not-password')

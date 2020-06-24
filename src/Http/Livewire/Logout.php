@@ -2,7 +2,6 @@
 
 namespace Radiocubito\TallAuth\Http\Livewire;
 
-use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Livewire\Component;
@@ -13,7 +12,7 @@ class Logout extends Component
 
     public function render()
     {
-        return view('livewire.auth.logout');
+        return view('tall-auth::livewire.logout');
     }
 
     public function logout(Request $request)

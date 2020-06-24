@@ -2,11 +2,11 @@
 
 namespace Radiocubito\TallAuth\Tests\Feature\Http\Livewire;
 
-use App\Http\Livewire\Auth\Logout;
-use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Livewire\Livewire;
+use Radiocubito\TallAuth\Http\Livewire\Logout;
+use Radiocubito\TallAuth\Tests\Fixtures\User;
 use Radiocubito\TallAuth\Tests\TestCase;
 
 class LogoutTest extends TestCase
