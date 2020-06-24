@@ -2,12 +2,11 @@
 
 namespace Radiocubito\TallAuth\Http\Livewire;
 
-use App\Http\Helpers\ThrottlesRequests;
-use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\VerifiesEmails;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\URL;
 use Livewire\Component;
+use Radiocubito\TallAuth\ThrottlesRequests;
 
 class ResendVerification extends Component
 {
@@ -28,7 +27,7 @@ class ResendVerification extends Component
 
     public function render()
     {
-        return view('livewire.auth.resend-verification');
+        return view('tall-auth::livewire.resend-verification');
     }
 
     public function resend(Request $request)

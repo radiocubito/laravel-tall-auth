@@ -19,6 +19,7 @@ class TallAuthServiceProvider extends ServiceProvider
         Livewire::component('tall-auth.register', \Radiocubito\TallAuth\Http\Livewire\Register::class);
         Livewire::component('tall-auth.login', \Radiocubito\TallAuth\Http\Livewire\Login::class);
         Livewire::component('tall-auth.logout', \Radiocubito\TallAuth\Http\Livewire\Logout::class);
+        Livewire::component('tall-auth.resend-verification', \Radiocubito\TallAuth\Http\Livewire\ResendVerification::class);
 
         Blade::directive('route', function ($expression) {
             return "<?php echo route({$expression}) ?>";
