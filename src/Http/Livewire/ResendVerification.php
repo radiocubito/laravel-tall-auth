@@ -49,6 +49,6 @@ class ResendVerification extends Component
 
     protected function redirectTo()
     {
-        return RouteServiceProvider::HOME;
+        return route('home');
     }
 }

@@ -21,7 +21,7 @@ class ConfirmPassword extends Component
     {
         $this->validate($this->rules(), $this->validationErrorMessages());
 
-        $this->resetPasswordConfirmationTimeout($request);
+        $this->resetPasswordConfirmationTimeout();
 
         return redirect()->intended($this->redirectPath());
     }
