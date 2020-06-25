@@ -123,7 +123,7 @@ class LoginTest extends TestCase
 
         $response->assertHasErrors('email');
 
-        $this->assertMatchesRegularExpression(
+        $this->assertRegExp(
             $this->getTooManyLoginAttemptsMessage(),
             collect((new MessageBag($response->payload['errorBag'] ?: []))->get('email'))->first()
         );

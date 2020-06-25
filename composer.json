@@ -1,6 +1,6 @@
 {
     "name": "radiocubito/laravel-tall-auth",
-    "description": "A self-hosted invoice manager",
+    "description": "A TALL (Tailwind CSS, Alpine.js, Laravel and Livewire) authentication for Laravel",
     "keywords": [
         "radiocubito",
         "laravel-tall-auth"

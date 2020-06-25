@@ -49,6 +49,10 @@ class TallAuthServiceProvider extends ServiceProvider
             __DIR__.'/../resources/views' => base_path('resources/views/vendor/tall-auth'),
         ], 'views');
 
+        $this->publishes([
+            __DIR__.'/../public' => public_path('vendor/tall-auth'),
+        ], 'assets');
+
         return $this;
     }
 
