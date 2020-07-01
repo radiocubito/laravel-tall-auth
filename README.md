@@ -27,7 +27,7 @@ php artisan vendor:publish --provider="Radiocubito\TallAuth\TallAuthServiceProvi
 
 Add the route macro. You must register the routes needed to handle authentication. You can put this in your routes file, or in the `map` method of `RouteServiceProvider`
 ```bash
-Route::tall-auth('/');
+Route::tallAuth('/');
 ```
 
 ## Usage
